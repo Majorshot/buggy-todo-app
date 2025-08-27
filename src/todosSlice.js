@@ -1,9 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Intentional bug: wrong endpoint and missing await
 export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
-  const response = axios.get('https://jsonplaceholder.typicode.com/todoz'); // wrong endpoint, missing await
+  const response = axios.get('https://jsonplaceholder.typicode.com/todoz'); // wrong endpoint
   return response.data;
 });
 
@@ -31,7 +30,6 @@ const todosSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchTodos.fulfilled, (state, action) => {
-        // Intentional bug: not updating state.items
         state.status = 'succeeded';
       })
       .addCase(fetchTodos.rejected, (state, action) => {
@@ -42,7 +40,6 @@ const todosSlice = createSlice({
         state.items.push(action.payload);
       })
       .addCase(deleteTodo.fulfilled, (state, action) => {
-        // Intentional bug: not removing the todo from items
       });
   },
 });

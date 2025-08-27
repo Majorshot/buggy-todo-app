@@ -15,7 +15,6 @@ function App() {
   const handleAdd = () => {
     const title = prompt('Enter todo:');
     if (title) {
-      // Intentional bug: wrong action dispatched
       dispatch(deleteTodo(title));
     }
   };
@@ -31,7 +30,6 @@ function App() {
       {status === 'loading' && <p>Loading...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <ul>
-        {/* Intentional bug: not using todos as prop, so won't re-render on state change */}
         <TodoList />
       </ul>
     </div>
@@ -39,7 +37,6 @@ function App() {
 }
 
 function TodoList() {
-  // Intentional bug: not using useSelector, so won't re-render
   return null;
 }
 
