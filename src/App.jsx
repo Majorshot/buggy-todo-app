@@ -15,9 +15,22 @@ function App() {
   const handleAdd = () => {
     const title = prompt('Enter todo:');
     if (title) {
-      dispatch(deleteTodo(title));
+      dispatch(addTodo(title));
     }
   };
+
+  function TodoList({ todos, onDelete }) {
+  return (
+    <>
+      {todos.map(todo => (
+        <li key={todo.id}>
+          {todo.title}
+          <button onClick={() => onDelete(todo.id)}>Delete</button>
+        </li>
+      ))}
+    </>
+  );
+}
 
   const handleDelete = (id) => {
     dispatch(deleteTodo(id));
@@ -30,7 +43,7 @@ function App() {
       {status === 'loading' && <p>Loading...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <ul>
-        <TodoList />
+        <TodoList todos={todos} onDelete={handleDelete} />
       </ul>
     </div>
   );

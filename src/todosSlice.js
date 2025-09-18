@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
-  const response = axios.get('https://jsonplaceholder.typicode.com/todoz'); // wrong endpoint
+  const response = await axios.get('https://jsonplaceholder.typicode.com/todos'); // wrong endpoint
   return response.data;
 });
 
@@ -31,6 +31,7 @@ const todosSlice = createSlice({
       })
       .addCase(fetchTodos.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.items = action.payload;
       })
       .addCase(fetchTodos.rejected, (state, action) => {
         state.status = 'failed';
@@ -40,6 +41,7 @@ const todosSlice = createSlice({
         state.items.push(action.payload);
       })
       .addCase(deleteTodo.fulfilled, (state, action) => {
+        state.items = state.items.filter((todo) => todo.id !== action.payload);
       });
   },
 });
