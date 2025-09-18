@@ -12,5 +12,3 @@ The following bugs were found and fixed in the project source so the app loads a
 ## App.jsx
   - Fixed `handleAdd` to dispatch `addTodo(title)` instead of `deleteTodo(title)`.
   - Replaced the placeholder `TodoList` (which returned `null`) with a component that renders `todos` from state and provides a Delete button that dispatches `deleteTodo(id)`.
-
-These changes align the async thunks, reducers, and React components so the UI updates after API calls.
